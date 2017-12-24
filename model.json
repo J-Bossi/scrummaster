@@ -1,0 +1,225 @@
+{
+  "languageModel": {
+    "types": [
+      {
+        "name": "AMAZON.DE_FIRST_NAME",
+        "values": [
+          {
+            "id": null,
+            "name": {
+              "value": "name",
+              "synonyms": []
+            }
+          }
+        ]
+      }
+    ],
+    "intents": [
+      {
+        "name": "AddNewMemberIntent",
+        "samples": [
+          "füge {memberName} hinzu",
+          "{memberName} ist dabei",
+          "{memberName} ist Teil unseres Teams",
+          "{memberName} ist ein neues Mitglied",
+          "dass {memberName} Teil unseres Teams ist",
+          "dass {memberName} teilnimmt"
+        ],
+        "slots": [
+          {
+            "name": "memberName",
+            "type": "AMAZON.DE_FIRST_NAME"
+          }
+        ]
+      },
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "ChooseStarterIntent",
+        "samples": [
+          "Wer fängt heute an",
+          "Starte das Daily",
+          "Starte daily scrum",
+          "Wer beginnt heute das Daily scrum",
+          "starte das standup meeting",
+          "wer heute anfängt",
+          "Das Meeting beginnt jetzt",
+          "Das standup meeting beginnt jetzt",
+          "dass das standup meeting jetzt beginnt",
+          "dass das Daily jetzt beginnt",
+          "wer heute beginnt"
+        ],
+        "slots": []
+      },
+      {
+        "name": "DeleteMemberIntent",
+        "samples": [
+          "{memberName} hat uns verlassen",
+          "{memberName} ist nicht mehr bei uns im Team",
+          "{memberName} ist nicht mehr im Team",
+          "{memberName} ist nicht mehr dabei"
+        ],
+        "slots": [
+          {
+            "name": "memberName",
+            "type": "AMAZON.DE_FIRST_NAME"
+          }
+        ]
+      },
+      {
+        "name": "FullTeamIntent",
+        "samples": [
+          "Wer ist im Team",
+          "wer im Team ist",
+          "wer dabei ist",
+          "wer mitmacht",
+          "welche Developer haben wir",
+          "welche Entwickler gibt es",
+          "welche Developer gibt es",
+          "welche Entwickler haben wir",
+          "wer ist im Entwicklungsteam",
+          "Zähle alle Mitglieder auf",
+          "Zähle alle Teammitglieder auf",
+          "Nenne alle Mitglieder",
+          "Wer macht beim Standup mit",
+          "wer alles im Team ist",
+          "wer alles dabei ist"
+        ],
+        "slots": []
+      },
+      {
+        "name": "ResetIntent",
+        "samples": [
+          "Lösche alle Mitglieder",
+          "Setze das Team zurück",
+          "Lösche die Mitgliederliste",
+          "Entferne alle Mitglieder",
+          "Entferne alle Developer",
+          "Entferne alle Entwickler",
+          "Lösche alle Entwickler"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "scrum master"
+  },
+  "prompts": [
+    {
+      "id": "Confirm.Intent-AddNewMemberIntent",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Ist {memberName} richtig?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Möchtest du {memberName} bestätigen?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Stimmt {memberName}?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Ich habe {memberName} verstanden. Stimmt das?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Ich habe {memberName} gehört. Richtig?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Soll ich {memberName} hinzufügen?"
+        }
+      ]
+    },
+    {
+      "id": "Confirm.Intent-DeleteMemberIntent",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Möchtest du {memberName} löschen?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Stimmt {memberName}?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Ich werde {memberName} löschen. Stimmt das?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Ich habe {memberName} gehört. Richtig?"
+        },
+        {
+          "type": "PlainText",
+          "value": "Soll ich {memberName} entfernen?"
+        }
+      ]
+    },
+    {
+      "id": "Confirm.Intent-ResetIntent",
+      "variations": [
+        {
+          "type": "PlainText",
+          "value": "Soll ich wirklich alle Mitglieder löschen?"
+        }
+      ]
+    }
+  ],
+  "dialog": {
+    "intents": [
+      {
+        "name": "AddNewMemberIntent",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirmation": "Confirm.Intent-AddNewMemberIntent"
+        },
+        "slots": [
+          {
+            "name": "memberName",
+            "type": "AMAZON.DE_FIRST_NAME",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      },
+      {
+        "name": "DeleteMemberIntent",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirmation": "Confirm.Intent-DeleteMemberIntent"
+        },
+        "slots": [
+          {
+            "name": "memberName",
+            "type": "AMAZON.DE_FIRST_NAME",
+            "elicitationRequired": false,
+            "confirmationRequired": false,
+            "prompts": {}
+          }
+        ]
+      },
+      {
+        "name": "ResetIntent",
+        "confirmationRequired": true,
+        "prompts": {
+          "confirmation": "Confirm.Intent-ResetIntent"
+        },
+        "slots": []
+      }
+    ]
+  }
+}
